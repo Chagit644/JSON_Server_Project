@@ -1,8 +1,9 @@
 import React from 'react'
 
 function Info() {
+
   return (
-    <div>Info</div>
+    <div>נתונים של משתמש מהסרבר</div>
   )
 }
 
