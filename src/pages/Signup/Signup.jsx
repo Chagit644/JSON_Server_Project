@@ -2,19 +2,24 @@ import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
+
   const navigate = useNavigate();
   const [input, setInput] = useState({ username: "", password: "", verifyPassword: "" });
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    
     if (input.password != input.verifyPassword) {
       alert("The passwords are different. Please try again.");
       setInput({ ...input, password: "", verifyPassword: "" });
     }
     else {
-      const data = [];
-  
+      getUserData();
+    }
+
+    async function getUserData() {
+      const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
+      const data = await response.json();
       if (data.length == 0) {
         navigate('/signup/details');
       } 
@@ -22,12 +27,9 @@ function Signup() {
         alert("You already have an account. Please login.");
         setInput({ username: "", password: "", verifyPassword: "" });
       }
-    }
 
-    // async function getUserData() {
-    //   const response = await fetch(`/users/?username=${input.username}`);
-    //   const data = await response.json()
-    // };
+    };
+    
 
   }
   return (

@@ -7,25 +7,23 @@ function Login() {
   
   function handleSubmit(e) {
     e.preventDefault();
-    // async function getUserData() {
-    //   const response = await fetch(`/users/?username=${input.username}`);
-    //   const data = await response.json()
-    // };
-    const data = {website: "1", id: 2, username: "1"}
-    if(data.website == input.password) {
-      localStorage.setItem("currentUser", JSON.stringify(data));
-      navigate(`/users/${data.id}/home`)
-      
-    }
-    else {
-      alert("One of the data entered is incorrect. Please try again.")
-      setInput({username: '', password: ''})
-    }
+    getUserData();
+
+    async function getUserData() {
+      const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
+      const data = await response.json()
+      if (data[0].website == input.password) {
+        localStorage.setItem("currentUser", JSON.stringify(data[0]));
+        navigate(`/users/${data[0].id}/home`)
+      }
+      else {
+        alert("One of the data entered is incorrect. Please try again.")
+        setInput({username: '', password: ''})
+      }
+    };
       
   }
   return (
-
-
     <>
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
