@@ -1,0 +1,9 @@
+.infoWrapper {
+    position: absolute;
+    top: 40%;
+    background-color: rgba(141, 25, 123);
+}
+    
+ul li{
+    list-style-type: none;
+}

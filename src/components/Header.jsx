@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 import { NavLink } from "react-router-dom";
 import Info from "./Info";
-function Header() {
+function Header({currentUser}) {
 
   const [isShowInfo, setIsShowInfo] = useState(false);
   return (
@@ -15,7 +15,7 @@ function Header() {
         <NavLink to="/login" onClick={() => localStorage.removeItem("currentUser")}>Logout</NavLink>
         <NavLink to=".">🏠</NavLink>
       </nav>
-      {isShowInfo && <Info/>}
+      {isShowInfo && <Info setIsShowInfo={setIsShowInfo} currentUser={currentUser}/>}
     </header>
   );
 }

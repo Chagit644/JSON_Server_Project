@@ -4,10 +4,13 @@ import Footer from './Footer'
 import {Outlet} from 'react-router-dom'
 
 function HomeLayout() {
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
     <>
-        <Header/>
-        <Outlet/>
+        <Header currentUser={currentUser}/>
+        <Outlet context={currentUser}/>
         <Footer/>
     </>
   )

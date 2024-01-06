@@ -5,8 +5,8 @@ function UserDetailsEntry(props) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  
   const [input, setInput] = useState({
-    id: 11,
     name: "",
     username: location.state.username,
     password: location.state.password,
@@ -26,10 +26,10 @@ function UserDetailsEntry(props) {
     }
   });
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     createNewUser();
-    navigate(`/users/${input.id}/home`);
-
+    
     async function createNewUser() {
       const response = await fetch(`http://localhost:3000/users`, {
         method: 'POST',
@@ -38,7 +38,12 @@ function UserDetailsEntry(props) {
         },
         body: JSON.stringify(input),
       })
-      localStorage.setItem('currentUser',response)
+      debugger;
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+      localStorage.setItem('currentUser',JSON.stringify(data))
+      navigate(`/users/${data.id}/home`);
     }
   }
 
