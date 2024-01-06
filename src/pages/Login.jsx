@@ -10,9 +10,9 @@ function Login() {
     getUserData();
 
     async function getUserData() {
-      const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
+      const response = await fetch(`http://localhost:3000/users/?username=${input.username}&website=${input.password}`);
       const data = await response.json()
-      if (data[0].website == input.password) {
+      if (data.length!=0) {
         localStorage.setItem("currentUser", JSON.stringify(data[0]));
         navigate(`/users/${data[0].id}/home`)
       }

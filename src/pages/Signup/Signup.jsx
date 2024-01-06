@@ -21,13 +21,16 @@ function Signup() {
       const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
       const data = await response.json();
       if (data.length == 0) {
-        navigate('/signup/details');
+        navigate('/signup/details',{
+          state:{
+          username:input.username,
+          password:input.password}
+        });
       } 
       else {
-        alert("You already have an account. Please login.");
+        alert("This usrename is already exist. Try another.");
         setInput({ username: "", password: "", verifyPassword: "" });
       }
-
     };
     
 
@@ -44,7 +47,7 @@ function Signup() {
           name="username"
           placeholder="Israel123"
           required
-        ></input>
+        ></input><br/>
         <label>Password</label>
         <input
           value={input.password}
@@ -52,7 +55,7 @@ function Signup() {
           type="Password"
           placeholder="*********"
           required
-        ></input>
+        ></input><br/>
         <label>Verify Password</label>
         <input
           value={input.verifyPassword}
@@ -60,7 +63,7 @@ function Signup() {
           type="Password"
           placeholder="*********"
           required
-        ></input>
+        ></input><br/>
         <button type="submit">Submit</button>
         <br />
         <span>Already have an account?</span>
