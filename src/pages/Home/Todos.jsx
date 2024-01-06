@@ -26,7 +26,7 @@ function Todos() {
         {todos.map((todo) => {
           return <li key={todo.id}>
             <p>Id: {todo.id}</p>
-            <p>Title: {todo.title}</p>
+            <input type="checkbox" /><span>Title: {todo.title}</span>
           </li>
         })}
       </ul>
