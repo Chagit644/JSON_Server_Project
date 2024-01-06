@@ -24,10 +24,9 @@ function Todos() {
       {isGotTodos && 
       <ul>
         {todos.map((todo) => {
-          <li key={todo.id}>
+          return <li key={todo.id}>
             <p>Id: {todo.id}</p>
             <p>Title: {todo.title}</p>
-             <input type='checkbox'>{todo.completed}</input>
           </li>
         })}
       </ul>
