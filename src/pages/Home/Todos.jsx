@@ -106,8 +106,10 @@ function Todos() {
             'Content-type': 'application/json'
           }
         })
-        todos.splice(todos.findIndex((t) => t == todo), 1);
-        setTodos(todos)
+        const currentTodoIndex=todos.findIndex((t) => t == todo)
+        const tempTodos=[...todos]
+        tempTodos.splice(currentTodoIndex, 1);
+        setTodos(tempTodos)
       }
       catch{
         alert("An error occurred. Please try again ")
