@@ -1,9 +1,10 @@
 .infoWrapper {
     position: absolute;
-    top: 40%;
-    background-color: rgba(141, 25, 123);
-}
-    
+    top: 20%;
+    right: 40%;
+    background-color: rgb(244, 180, 235);
+}    
+
 ul li{
     list-style-type: none;
 }

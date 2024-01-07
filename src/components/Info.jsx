@@ -5,7 +5,7 @@ function Info({currentUser,setIsShowInfo}) {
 
   return (
     <div className={styles.infoWrapper}>
-      <p onClick={() => setIsShowInfo(prev => !prev)}>❌</p>
+      <button onClick={() => setIsShowInfo(prev => !prev)}>❌</button>
       <ul>
         <li>Username: {currentUser.username}</li>
         <li>Name: {currentUser.name}</li>

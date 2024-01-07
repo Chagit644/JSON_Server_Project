@@ -18,22 +18,27 @@ function Signup() {
     }
 
     async function getUserData() {
-      const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
-      const data = await response.json();
+      try {
+        const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
+        const data = await response.json();
 
-      if (data.length == 0) {
-        navigate('/signup/details',{
-          state:{
-          username:input.username,
-          password:input.password,
-          hello: "hello"
+        if (data.length == 0) {
+          navigate('/signup/details',{
+            state:{
+            username:input.username,
+            password:input.password,
+            hello: "hello"
+          }
+          });
+        } 
+        
+        else {
+          alert("This usrename is already exist. Try another.");
+          setInput({ username: "", password: "", verifyPassword: "" });
         }
-        });
-      } 
-      
-      else {
-        alert("This usrename is already exist. Try another.");
-        setInput({ username: "", password: "", verifyPassword: "" });
+      }
+      catch {
+        alert("An error occurred. Please try again ")
       }
     };
     

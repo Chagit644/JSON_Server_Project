@@ -31,19 +31,21 @@ function UserDetailsEntry(props) {
     createNewUser();
     
     async function createNewUser() {
-      const response = await fetch(`http://localhost:3000/users`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(input),
-      })
-      debugger;
-      console.log(response);
-      const data = await response.json();
-      console.log(data);
-      localStorage.setItem('currentUser',JSON.stringify(data))
-      navigate(`/users/${data.id}/home`);
+      try {
+        const response = await fetch(`http://localhost:3000/users`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify(input),
+        })
+        const data = await response.json();
+        localStorage.setItem('currentUser',JSON.stringify(data))
+        navigate(`/users/${data.id}/home`);
+      }
+      catch {
+        alert("An error occurred. Please try again ")
+      }
     }
   }
 
