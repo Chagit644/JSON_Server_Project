@@ -7,9 +7,9 @@ import UserDetailsEntry from './pages/Signup/UserDetailsEntry.jsx'
 import Posts from './pages/Home/Posts/Posts.jsx'
 import Comments from './pages/Home/Posts/Comments.jsx'
 import Todos from './pages/Home/Todos/Todos.jsx'
-import Albums from './pages/Home/Albums'
+import Albums from './pages/Home/Albums/Albums.jsx'
 import HomeLayout from './components/HomeLayout'
-
+import Photos from './pages/Home/Albums/Photos.jsx'
 function App() {
 
 
@@ -25,7 +25,10 @@ function App() {
             <Route path=':id/comments' element={<Comments/>}/>
             </Route>
           <Route path='todos' element={<Todos/>} />
-          <Route path='albums' element={<Albums/>} />
+          <Route path='albums' >
+          <Route index element={<Albums/>} />
+          <Route path=':albumId/photos' element={<Photos/>}/>
+          </Route>
         </Route>
         <Route path='login' element={<Login/>}/>
         <Route path='signup'>

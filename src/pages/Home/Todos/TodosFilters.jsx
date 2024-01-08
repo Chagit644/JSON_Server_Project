@@ -21,8 +21,7 @@ function TodosFilters({setIsGotTodos, currentUserId, getTodos}) {
       function handleCompletedOfFiltersChange(e) {
         setFilters({ ...filters, completed: e.target.value })
       }
-    
-
+  
   return (
     <div>
         <h4>Filters:</h4>
