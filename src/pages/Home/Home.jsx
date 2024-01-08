@@ -3,10 +3,10 @@ import { useOutletContext } from 'react-router-dom'
 
 function Home() {
 
-  const currentUser = useOutletContext();
+  const generalDataAndTools = useOutletContext();
 
   return (
-    <h1>Hello {currentUser.name}</h1>
+    <h1>Hello {generalDataAndTools.currentUser.name}</h1>
     )
 }
 

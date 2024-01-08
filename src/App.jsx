@@ -4,12 +4,15 @@ import Home from './pages/Home/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup/Signup.jsx'
 import UserDetailsEntry from './pages/Signup/UserDetailsEntry.jsx'
-import Posts from './pages/Home/Posts'
+import Posts from './pages/Home/Posts/Posts.jsx'
+import Comments from './pages/Home/Posts/Comments.jsx'
 import Todos from './pages/Home/Todos/Todos.jsx'
 import Albums from './pages/Home/Albums'
 import HomeLayout from './components/HomeLayout'
 
 function App() {
+
+
   return (
   <BrowserRouter>
     <Routes>
@@ -17,7 +20,10 @@ function App() {
         <Route index element={<Navigate to='/login' replace />}/>
         <Route path='users/:id/home' element={<HomeLayout/>}>
           <Route index element={<Home/>}/>
-          <Route path='posts' element={<Posts/>} />
+          <Route path='posts'>
+            <Route index element={<Posts/>}/>
+            <Route path=':id/comments' element={<Comments/>}/>
+            </Route>
           <Route path='todos' element={<Todos/>} />
           <Route path='albums' element={<Albums/>} />
         </Route>

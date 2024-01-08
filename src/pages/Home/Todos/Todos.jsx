@@ -1,32 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import AddTodoWindow from "./AddTodoWindow";
-import Filters from "./Filters";
+import TodosFilters from "./TodosFilters";
 import TodosTable from "./TodosTable";
+import AddWindow from "../../../components/AddWindow";
 
 function Todos() {
 
   const [isGotTodos, setIsGotTodos] = useState(false);
   const [isShowAddTodoWindow, setIsShowAddTodoWindow] = useState(false);
   const [todos, setTodos] = useState([]);
-  const currentUser = useOutletContext();
+  const generalDataAndTools = useOutletContext();
+  const currentUser = generalDataAndTools.currentUser;
 
   useEffect(() => {
-    getTodos(`http://localhost:3000/todos/?userId=${currentUser.id}`);
+    getTodos(`users/${currentUser.id}/todos`);
   }, []);
 
   async function getTodos(url) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw response.statusText;
-      }
-      const data = await response.json();
-      setIsGotTodos(true);
-      setTodos(data);
-    } catch {
-      alert("An error occurred. Please try again ");
-    }
+    generalDataAndTools.getItemsFunc(url, setTodos, setIsGotTodos)
   }
 
   function handleOrderChange(e) {
@@ -53,7 +44,7 @@ function Todos() {
 
   return (
     <>
-      <Filters setIsGotTodos={setIsGotTodos} currentUserId={currentUser.id} getTodos={getTodos} />
+      <TodosFilters setIsGotTodos={setIsGotTodos} currentUserId={currentUser.id} getTodos={getTodos} />
       <div>
         <label>Order by:</label>
         <select onChange={handleOrderChange}>
@@ -62,13 +53,17 @@ function Todos() {
           <option value="alphabetical">Alphabetical</option>
           <option value="random">Random</option>
         </select>
-        <button onClick={() => setIsShowAddTodoWindow(true)}>➕</button>
       </div>
+      <button onClick={() => setIsShowAddTodoWindow(true)}>➕</button>
       {!isGotTodos && <h3>Loading...</h3>}
-      {isGotTodos && <TodosTable todos={todos} setTodos={setTodos}/>}
-      {isShowAddTodoWindow && (
-        <AddTodoWindow currentUser={currentUser} setIsShowAddTodoWindow={setIsShowAddTodoWindow} setTodos={setTodos} />
-      )}
+      {isGotTodos && <TodosTable  generalDataAndTools={generalDataAndTools} todos={todos} setTodos={setTodos}/>}
+      {isShowAddTodoWindow && 
+         <AddWindow setIsAddWindowShow={setIsShowAddTodoWindow} baseItem={{
+          userId: currentUser.id,
+          title: '',
+          completed: false
+          }} propertiesArr={["title"]} url= {`todos`} setItems={setTodos}/>
+      }
     </>
   );
 }

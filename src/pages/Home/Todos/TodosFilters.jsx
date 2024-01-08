@@ -1,13 +1,13 @@
 import {useState, React} from 'react'
 
-function Filters({setIsGotTodos, currentUserId, getTodos}) {
+function TodosFilters({setIsGotTodos, currentUserId, getTodos}) {
 
     const [filters, setFilters] = useState({ id: '', title: '', completed: "all" })
 
     function handleFiltersSubmit(e) {
         e.preventDefault();
         setIsGotTodos(false)
-        let url = `http://localhost:3000/todos/?userId=${currentUserId}`
+        let url = `users/${currentUserId}/todos?`
         if (filters.id != '')
           url += `&id=${filters.id}`
         if (filters.title != '')
@@ -47,4 +47,4 @@ function Filters({setIsGotTodos, currentUserId, getTodos}) {
 
 }
 
-export default Filters
+export default TodosFilters

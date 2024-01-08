@@ -30,7 +30,6 @@ function Signup() {
             state:{
             username:input.username,
             password:input.password,
-            hello: "hello"
           }
           });
         } 
