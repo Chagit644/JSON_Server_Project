@@ -39,6 +39,9 @@ function UserDetailsEntry(props) {
           },
           body: JSON.stringify(input),
         })
+        if(!response.ok) {
+          throw response.statusText;
+        }
         const data = await response.json();
         localStorage.setItem('currentUser',JSON.stringify(data))
         navigate(`/users/${data.id}/home`);

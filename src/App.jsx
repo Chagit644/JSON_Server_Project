@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup/Signup.jsx'
 import UserDetailsEntry from './pages/Signup/UserDetailsEntry.jsx'
 import Posts from './pages/Home/Posts'
-import Todos from './pages/Home/Todos'
+import Todos from './pages/Home/Todos/Todos.jsx'
 import Albums from './pages/Home/Albums'
 import HomeLayout from './components/HomeLayout'
 

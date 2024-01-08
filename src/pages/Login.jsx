@@ -12,11 +12,14 @@ function Login() {
     async function getUserData() {
       try {
         const response = await fetch(`http://localhost:3000/users/?username=${input.username}&website=${input.password}`);
+        if(!response.ok) {
+          throw response.statusText;
+        }
         const data = await response.json()
         if (data.length!=0) {
           localStorage.setItem("currentUser", JSON.stringify(data[0]));
           navigate(`/users/${data[0].id}/home`)
-        }
+        } 
         else {
           alert("One of the data entered is incorrect. Please try again.")
           setInput({username: '', password: ''})
@@ -25,9 +28,6 @@ function Login() {
       catch {
         alert("An error occurred. Please try again ")
       }
-      
-       
-      
     };
       
   }
