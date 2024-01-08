@@ -1,6 +1,6 @@
 import {useState, React} from 'react'
 
-function Filters({setIsGotTodos, currentUserId, getTodosFromServer}) {
+function Filters({setIsGotTodos, currentUserId, getTodos}) {
 
     const [filters, setFilters] = useState({ id: '', title: '', completed: "all" })
 
@@ -14,7 +14,7 @@ function Filters({setIsGotTodos, currentUserId, getTodosFromServer}) {
           url += `&title=${filters.title}`
         if (filters.completed != 'all')
           url += `&completed=${filters.completed == 'completed' ? true : false}`
-        getTodosFromServer(url);
+          getTodos(url);
        
       }
 
