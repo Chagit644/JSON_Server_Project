@@ -1,27 +1,30 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useOutletContext, useParams,useLocation } from 'react-router-dom';
+import { useOutletContext, useParams, useLocation } from 'react-router-dom';
+import PageOfPhotos from './PageOfPhotos';
 
 function Photos() {
-    const [photos, setPosts] = useState([])
-    const [isGotPhotos, setIsGotPhotos] = useState(false)
-    const generalDataAndTools = useOutletContext();
-    const location=useLocation();
+    const [numOfPages, setNumOfPages] = useState(1);
     const { albumId } = useParams();
-    useEffect(() => {
-        generalDataAndTools.getItemsFunc(`albums/${albumId}/photos`, setPosts, setIsGotPhotos)
-    }, [])
+    const [pageNames, setPageNames] = useState([`album${albumId}page1`]);
     return (
         <>
-            <h4>Album number:{albumId}</h4>
-            {photos.map((photo) => {
-                return <div>
-                    <p>{photo.id}</p>
-                    <p>{photo.title}</p>
-                    <img src={photo.thumbnailUrl} />
-                </div>
-            })
-            }
+            {pageNames.map((url => {
+                if (localStorage.getItem(url) == undefined) {
+                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} picturesToShow={[]} />
+                }
+                else {
+                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} picturesToShow={[JSON.parse(localStorage.getItem(url))]} />
+                }
+            }))}
+            <button onClick={() => {
+                setPageNames((prev) => {
+                    setNumOfPages(prev => prev + 1)
+                    const tempPageName = [...prev];
+                    tempPageName.push(`album${albumId}page${numOfPages + 1}`)
+                    return tempPageName;
+                })
+            }}>show more</button>
         </>
     )
 }
