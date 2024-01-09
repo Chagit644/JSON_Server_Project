@@ -13,7 +13,7 @@ function Header({currentUser}) {
         <NavLink to="todos">Todos</NavLink>
         <NavLink to="posts">Posts</NavLink>
         <NavLink to="albums">Albums</NavLink>
-        <NavLink to="/login" onClick={() => localStorage.removeItem("currentUser")}>Logout</NavLink>
+        <NavLink to="/login" onClick={() => localStorage.clear()}>Logout</NavLink>
         <NavLink to=".">🏠</NavLink>
       </nav>
       {isShowInfo && <Info setIsShowInfo={setIsShowInfo} currentUser={currentUser}/>}

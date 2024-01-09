@@ -9,12 +9,12 @@ function Photos() {
     const [pageNames, setPageNames] = useState([`album${albumId}page1`]);
     return (
         <>
-            {pageNames.map((url => {
-                if (localStorage.getItem(url) == undefined) {
-                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} picturesToShow={[]} />
+            {pageNames.map((name => {
+                if (localStorage.getItem(name) == undefined) {
+                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} photosToShow={[]} />
                 }
                 else {
-                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} picturesToShow={[JSON.parse(localStorage.getItem(url))]} />
+                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} photosToShow={[JSON.parse(localStorage.getItem(name))]} />
                 }
             }))}
             <button onClick={() => {
