@@ -9,6 +9,7 @@ function Todos() {
   const [isGotTodos, setIsGotTodos] = useState(false);
   const [isShowAddTodoWindow, setIsShowAddTodoWindow] = useState(false);
   const [todos, setTodos] = useState([]);
+  const [filteredTodos, setFiltersTodos] = useState([])
   const generalDataAndTools = useOutletContext();
   const currentUser = generalDataAndTools.currentUser;
 

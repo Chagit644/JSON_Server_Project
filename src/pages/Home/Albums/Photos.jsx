@@ -1,23 +1,24 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { useOutletContext, useParams, useLocation } from 'react-router-dom';
+import { useState } from 'react'
+import { useOutletContext, useParams} from 'react-router-dom';
 import PageOfPhotos from './PageOfPhotos';
+import styles from'../../../css/Albums.module.css'
 
 function Photos() {
     const [numOfPages, setNumOfPages] = useState(1);
     const { albumId } = useParams();
     const [pageNames, setPageNames] = useState([`album${albumId}page1`]);
+    const [isFirst,setIsFirst]=useState(true);
+    const [isAddPhotosWindowShow, setIsAddPhotosWindowShow] = useState(false);
+    const generalDataAndTools = useOutletContext();
     return (
         <>
+            <button onClick={() => setIsAddPhotosWindowShow(true)}>➕</button>
             {pageNames.map((name => {
-                if (localStorage.getItem(name) == undefined) {
-                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} photosToShow={[]} />
-                }
-                else {
-                    return <PageOfPhotos albumId={albumId} currentPage={numOfPages} photosToShow={[JSON.parse(localStorage.getItem(name))]} />
-                }
+                return<div > <PageOfPhotos isAddPhotosWindowShow={isAddPhotosWindowShow} setIsAddPhotosWindowShow={setIsAddPhotosWindowShow} generalDataAndTools={generalDataAndTools} albumId={albumId} currentPage={numOfPages} photosToShow={localStorage.getItem(name) == undefined ? [] : [JSON.parse(localStorage.getItem(name))] } isFirst={isFirst}/></div>
             }))}
             <button onClick={() => {
+                setIsFirst(false);
                 setPageNames((prev) => {
                     setNumOfPages(prev => prev + 1)
                     const tempPageName = [...prev];

@@ -1,0 +1,17 @@
+.photos{
+    display: flex;
+    flex-wrap:wrap;
+}
+.photo{
+    background-color: #dcdee0;
+    margin: 1%;
+    height: 370px;
+    width:18%;
+}
+.photoTitle{
+    height: 60px;
+}
+
+body{
+    margin-top:52px;
+}

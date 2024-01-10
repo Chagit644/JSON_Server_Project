@@ -1,0 +1,30 @@
+.singlePostWindow{
+    position: absolute;
+    top: 30%;
+    right: 35%;
+    width: 30%;
+    height: auto;
+    background-color:#e4e4e4;
+    border-radius: 3%;
+    padding: 10px;
+}
+.xButton{
+    margin-right:auto;
+    margin-left:auto;
+    cursor: pointer;
+    width: 30px;
+}
+.allPosts{
+    display: flex;
+    flex-wrap:wrap;
+}
+.postTitle{
+    height: 60px;
+}
+.singlePost{
+    background-color: #cfb7c2;
+    margin: 1%;
+    height: 200px;
+    width:23%;
+}
+

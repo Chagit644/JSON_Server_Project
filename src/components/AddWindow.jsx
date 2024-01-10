@@ -1,4 +1,5 @@
 import { React, useState } from 'react'
+import styles from '../css/AddWindow.module.css'
 
 function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems }) {
 
@@ -32,8 +33,8 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems 
     }
 
     return (
-        <div>
-            <p onClick={() => setIsAddWindowShow(false)}>❌</p>
+        <div className={styles.addWindow}>
+            <p onClick={() => setIsAddWindowShow(false)} className={styles.xbutton} >❌</p>
             <form onSubmit={handleSubmit}>
                 {propertiesArr.map((prop) => {
                     return (
@@ -48,7 +49,7 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems 
                                 })}
                                 type="text"
                                 required
-                            />
+                            /><br/>
                         </>
                     )
                 })}

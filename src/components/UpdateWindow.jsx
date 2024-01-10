@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styles from '../css/UpdateWindow.module.css'
 
 function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propertiesArr, setItemInAdditionalWindow}) {
 
@@ -37,8 +38,8 @@ function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propert
     }
 
   return (
-    <div>
-    <p onClick={() => setOldItem(null)}>❌</p>
+    <div className={styles.updateWindow}>
+    <p onClick={() => setOldItem(null)} className={styles.xbutton}>❌</p>
     <form onSubmit={handleSubmit}>
     {propertiesArr.map((prop) => {
         return (
@@ -48,11 +49,11 @@ function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propert
                     let tempItem = {...prev};
                     tempItem[prop] = e.target.value;
                     return tempItem;
-                })} value={newItem[prop]}></input>
+                })} value={newItem[prop]}></input><br/>
             </>
         )
     })}
-    <button type="submit">Send</button>
+    <button type="submit">Update</button>
     </form>
   </div>
   )

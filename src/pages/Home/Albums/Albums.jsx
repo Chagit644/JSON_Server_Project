@@ -3,6 +3,7 @@ import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import AlbumsFilters from './AlbumsFilters';
 import AddWindow from '../../../components/AddWindow';
+import styles from'../../../css/Albums.module.css'
 function Albums() {
   const [albums, setAlbums] = useState([]);
   const [isGotAlbums, setIsGotAlbums] = useState(false)

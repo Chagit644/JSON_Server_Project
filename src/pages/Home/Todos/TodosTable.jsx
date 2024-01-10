@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import UpdateWindow from '../../../components/UpdateWindow'
-
+import styles from '../../../css/Todos.module.css'
 function TodosTable({generalDataAndTools, todos, setTodos }) {
 
   const [currentUpdated, setCurrentUpdated] = useState(null);
@@ -29,12 +29,14 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
   }
  
   return (
-    <table>
+    <table className={styles.todosTable}>
       <thead>
         <tr>
           <th>Id</th>
           <th>Title</th>
           <th>completed?</th>
+          <th>Uptade</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -46,8 +48,8 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
               <td>
                 <input type="checkbox" checked={todo.completed} onChange={() => updateTodo(todo, { ...todo, completed: !todo.completed })} />
               </td>
-              <td onClick={() => setCurrentUpdated(todo)}>✏️</td>
-              <td onClick={() => generalDataAndTools.deleteItemFunc(`todos/${todo.id}`,todo, todos, setTodos)}>🗑️</td>
+              <td className={styles.actionButtons} onClick={() => setCurrentUpdated(todo)}>✏️</td>
+              <td className={styles.actionButtons} onClick={() => generalDataAndTools.deleteItemFunc(`todos/${todo.id}`,todo, todos, setTodos)}>🗑️</td>
             </tr>
           );
         })}

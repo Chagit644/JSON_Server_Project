@@ -9,7 +9,6 @@ function UserDetailsEntry(props) {
   const [input, setInput] = useState({
     name: "",
     username: location.state.username,
-    password: location.state.password,
     email: "",
     address: {
       street: "",
@@ -18,7 +17,7 @@ function UserDetailsEntry(props) {
       zipCode: "",
     },
     phone: "",
-    website: "",
+    website:  location.state.password,
     company: {
       name: "",
       catchPhrase: "",
@@ -118,14 +117,6 @@ function UserDetailsEntry(props) {
           name="phone"
           placeholder="0527613248"
           required
-        />
-        <label>Website</label>
-        <input
-          value={input.website}
-          onChange={(e) => setInput({ ...input, website: e.target.value })}
-          type="text"
-          name="website"
-          placeholder="Intel.com"
         />
         <h4>Company</h4>
         <label>Name</label>

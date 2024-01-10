@@ -9,7 +9,7 @@ function Header({currentUser}) {
 
     <header>
       <nav className={styles.nav}>
-        <button onClick={() => setIsShowInfo(prev => !prev)}>Info</button>
+        <p className={styles.infoButtom} onClick={() => setIsShowInfo(prev => !prev)}>hello <u>{currentUser.name}</u> 👨</p>
         <NavLink to="todos">Todos</NavLink>
         <NavLink to="posts">Posts</NavLink>
         <NavLink to="albums">Albums</NavLink>

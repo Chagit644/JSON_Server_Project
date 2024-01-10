@@ -3,11 +3,11 @@ import { useActionData, useOutletContext } from "react-router-dom";
 import SinglePostWindow from './SinglePostWindow';
 import PostsFilters from './PostsFilters';
 import AddWindow from '../../../components/AddWindow';
+import styles from '../../../css/posts.module.css'
 
 function Posts() {
 
   const [isAddPostWindowShow, setIsAddPostWindowShow] = useState(false);
-
   const [currentSelectedPost, setCurrentSelectedPost] = useState(null);
   const [isGotPosts, setIsGotPosts] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -28,14 +28,14 @@ function Posts() {
       <PostsFilters setIsGotPosts={setIsGotPosts} currentUserId={currentUser.id} getPosts={getPosts} />
       <button onClick={() => setIsAddPostWindowShow(true)}>➕</button>
 
-      <div>
+      <div >
         {!isGotPosts && <p>Loading...</p>}
-        {isGotPosts && <div>
+        {isGotPosts && <div className={styles.allPosts}>
           {posts.map((post) =>
-            <div key={post.id}>
-              <p>{post.title}</p>
+            <div key={post.id} className={styles.singlePost}>
               <p> Id: {post.id}</p>
-              <button onClick={() => setCurrentSelectedPost(post)}>Open</button>
+              <p className={styles.postTitle}>{post.title}</p>
+              <button onClick={() => setCurrentSelectedPost(post)} className={styles.openButton}>Open</button>
             </div>)}
         </div>}
       </div>

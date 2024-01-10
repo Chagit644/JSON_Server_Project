@@ -1,6 +1,27 @@
 .nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #e4e4e4 ;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding: 2% 1% 1% 1%;
+    font-size: 1.4em;
+}
+a{
+    color: #805D6E;
+}
+a:hover{
+    color: #394855;
+}
+.infoButtom{
+    margin-top: 1px;
+    cursor: pointer;
+}
+.infoButtom:hover{
+    color: #394855;
 }
 koooo{
     background-color: #805D6E;

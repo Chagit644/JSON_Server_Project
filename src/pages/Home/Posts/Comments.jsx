@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useOutletContext } from 'react-router-dom'
+import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import UpdateWindow from "../../../components/UpdateWindow"
 import AddWindow from "../../../components/AddWindow"
 
@@ -9,12 +9,12 @@ function Comments() {
     const [isGotComments, setIsGotComments] = useState(false);
     const [isAddCommentWindowShow, setIsAddCommentWindowShow] = useState(false);
     const [currentUpdated, setCurrentUpdated] = useState(null)
-
+    
+    const {postId} = useParams();
+    const currentPostId = postId;
     const generalDataAndTools = useOutletContext();
     const currentUserEmail = generalDataAndTools.currentUser.email;
-
-    const location = useLocation();
-    const currentPostId = location.state.currentPostId;
+    
 
     useEffect(() => {
         generalDataAndTools.getItemsFunc(`posts/${currentPostId}/comments`, setComments, setIsGotComments)
