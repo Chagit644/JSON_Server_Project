@@ -1,25 +1,17 @@
-import React from 'react'
+import {React, useState} from 'react'
 
-function Filters({setFilteredItems}) {
+function Filters({updateAllItems, filteredItems, setFilteredItems, allItems, setAllItems}) {
 
     const [filters, setFilters] = useState({ id: '', title: '', completed: "all" })
 
     function handleFiltersSubmit(e) {
         e.preventDefault();
-        setFilteredItems(prev => prev.filter((item) => {
-            if (filters.id != '' && filters.id != item.id)
-                return false;
-            
-        }))
-
-        let url = `users/${currentUserId}/todos?`
-        if (filters.id != '')
-          url += `&id=${filters.id}`
-        if (filters.title != '')
-          url += `&title=${filters.title}`
-        if (filters.completed != 'all')
-          url += `&completed=${filters.completed == 'completed' ? true : false}`
-          getTodos(url);
+        setFilteredItems( 
+          allItems.filter(item => 
+             (filters.id == "" || filters.id == item.id) && 
+            (filters.title == "" || filters.title == item.title) &&
+            (filters.completed == "all" || filters.completed == "completed")));
+        updateAllItems();
        
       }
 

@@ -3,7 +3,7 @@ import UpdateWindow from '../../../components/UpdateWindow'
 import AddWindow from '../../../components/AddWindow';
 import styles from'../../../css/Albums.module.css'
 
-function PageOfPhotos({ isAddPhotosWindowShow, setIsAddPhotosWindowShow, generalDataAndTools, albumId, currentPage, photosToShow,isFirst }) {
+function PageOfPhotos({ isAddPhotoWindowShow, setIsAddPhotoWindowShow, generalDataAndTools, albumId, currentPage, photosToShow}) {
 
     const [photos, setPhotos] = useState(photosToShow.flat());
     const [isGotPhotos, setIsGotPhotos] = useState(false);
@@ -35,8 +35,8 @@ function PageOfPhotos({ isAddPhotosWindowShow, setIsAddPhotosWindowShow, general
     }
     return (
         <>
-            {isAddPhotosWindowShow &&
-                <AddWindow setIsAddWindowShow={setIsAddPhotosWindowShow} baseItem={{
+            {isAddPhotoWindowShow &&
+                <AddWindow setIsAddWindowShow={setIsAddPhotoWindowShow} baseItem={{
                     albumId: albumId,
                     title: '',
                     url: '',

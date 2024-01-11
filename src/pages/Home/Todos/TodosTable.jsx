@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import UpdateWindow from '../../../components/UpdateWindow'
 import styles from '../../../css/Todos.module.css'
-function TodosTable({generalDataAndTools, todos, setTodos }) {
+
+function TodosTable({updateAllTodos, generalDataAndTools, todos, setTodos }) {
 
   const [currentUpdated, setCurrentUpdated] = useState(null);
 
@@ -25,6 +26,7 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
         prev[currentTodoIndex] = data;
         return prev;
       });
+      updateAllTodos();
     })();
   }
  
@@ -54,7 +56,7 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
           );
         })}
         {currentUpdated && 
-            <UpdateWindow url={`todos/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} items={todos} setItems={setTodos} propertiesArr={['title']}/>        
+            <UpdateWindow updateAllItems={updateAllTodos} url={`todos/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} items={todos} setItems={setTodos} propertiesArr={['title']}/>        
         }
       </tbody>
     </table>

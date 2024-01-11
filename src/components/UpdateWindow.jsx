@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../css/UpdateWindow.module.css'
 
-function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propertiesArr, setItemInAdditionalWindow}) {
+function UpdateCommentWindow({updateAllItems, url, oldItem, setOldItem, items, setItems, propertiesArr, setItemInAdditionalWindow}) {
 
     const [newItem, setNewItem] = useState({...oldItem})
 
@@ -19,23 +19,29 @@ function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propert
             if (!response.ok) {
               throw response.statusText;
             }
+            debugger;
             const data = await response.json();
             const currentIndex = items.findIndex((e) => e == oldItem);
+            setNewItem(data);
+            setOldItem(null);
             setItems((prev) => {
               prev = [...prev];
               prev[currentIndex] = data;
               return prev;
             });
-            setNewItem(data);
-            setOldItem(null);
             if(setItemInAdditionalWindow != null)
-              setItemInAdditionalWindow(data);
+            setItemInAdditionalWindow(data);
           })();
         }
         catch {
             alert(`An error occurred. Please try again `);
         }
     }
+
+    useEffect(() => {
+      debugger;
+      updateAllItems();
+    }, [items]);
 
   return (
     <div className={styles.updateWindow}>
@@ -57,7 +63,6 @@ function UpdateCommentWindow({url, oldItem, setOldItem, items, setItems, propert
     </form>
   </div>
   )
-    
 }
 
 export default UpdateCommentWindow

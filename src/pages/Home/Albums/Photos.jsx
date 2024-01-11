@@ -1,28 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useOutletContext, useParams} from 'react-router-dom';
 import PageOfPhotos from './PageOfPhotos';
 import styles from'../../../css/Albums.module.css'
 
 function Photos() {
-    const [numOfPages, setNumOfPages] = useState(1);
+
+    const [currentPages, setCurrentPages] = useState([1]);
+    const [isAddPhotoWindowShow, setIsAddPhotoWindowShow] = useState(false);
     const { albumId } = useParams();
-    const [pageNames, setPageNames] = useState([`album${albumId}page1`]);
-    const [isFirst,setIsFirst]=useState(true);
-    const [isAddPhotosWindowShow, setIsAddPhotosWindowShow] = useState(false);
     const generalDataAndTools = useOutletContext();
+
+    const PHOTOS_IN_PAGE = 5;
+    const sumOfPhotosinAlbum = null;
+
+    useEffect(() => {
+        (async() => {
+            const response = await fetch(`http://localhost:3000/albums/${albumId}/photos/?_start=0&_limit=0`)
+            sumOfPhotosinAlbum = response.headers.get("X-Total-Count");
+        })();
+    }, [])
+
     return (
         <>
-            <button onClick={() => setIsAddPhotosWindowShow(true)}>➕</button>
-            {pageNames.map((name => {
-                return<div > <PageOfPhotos isAddPhotosWindowShow={isAddPhotosWindowShow} setIsAddPhotosWindowShow={setIsAddPhotosWindowShow} generalDataAndTools={generalDataAndTools} albumId={albumId} currentPage={numOfPages} photosToShow={localStorage.getItem(name) == undefined ? [] : [JSON.parse(localStorage.getItem(name))] } isFirst={isFirst}/></div>
+            <button onClick={() => setIsAddPhotoWindowShow(true)}>➕</button>
+            {currentPages.map((name => {
+                return<div > <PageOfPhotos isAddPhotoWindowShow={isAddPhotoWindowShow} setIsAddPhotoWindowShow={setIsAddPhotoWindowShow} generalDataAndTools={generalDataAndTools} albumId={albumId} currentPage={name} photosToShow={localStorage.getItem(name) == undefined ? [] : [JSON.parse(localStorage.getItem(name))] }/></div>
             }))}
             <button onClick={() => {
-                setIsFirst(false);
-                setPageNames((prev) => {
-                    setNumOfPages(prev => prev + 1)
+                setCurrentPages((prev) => {
                     const tempPageName = [...prev];
-                    tempPageName.push(`album${albumId}page${numOfPages + 1}`)
+                    tempPageName.push(currentPages.at(-1) +1 )
                     return tempPageName;
                 })
             }}>show more</button>
