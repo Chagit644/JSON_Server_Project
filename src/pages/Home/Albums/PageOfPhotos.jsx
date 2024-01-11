@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import UpdateWindow from '../../../components/UpdateWindow'
 import AddWindow from '../../../components/AddWindow';
-import styles from'../../../css/Albums.module.css'
+import styles from '../../../css/Albums.module.css'
 
-function PageOfPhotos({ isAddPhotosWindowShow, setIsAddPhotosWindowShow, generalDataAndTools, albumId, currentPage, photosToShow,isFirst }) {
+function PageOfPhotos({ isAddPhotosWindowShow, setIsAddPhotosWindowShow, generalDataAndTools, albumId, currentPage, photosToShow, isFirst }) {
 
     const [photos, setPhotos] = useState(photosToShow.flat());
     const [isGotPhotos, setIsGotPhotos] = useState(false);

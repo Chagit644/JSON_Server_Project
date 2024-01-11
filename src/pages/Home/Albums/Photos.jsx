@@ -13,7 +13,7 @@ function Photos() {
     const generalDataAndTools = useOutletContext();
     return (
         <>
-            <button onClick={() => setIsAddPhotosWindowShow(true)}>➕</button>
+            <button className={styles.addButton}  onClick={() =>  setIsAddPhotosWindowShow(true)}>➕</button>
             {pageNames.map((name => {
                 return<div > <PageOfPhotos isAddPhotosWindowShow={isAddPhotosWindowShow} setIsAddPhotosWindowShow={setIsAddPhotosWindowShow} generalDataAndTools={generalDataAndTools} albumId={albumId} currentPage={numOfPages} photosToShow={localStorage.getItem(name) == undefined ? [] : [JSON.parse(localStorage.getItem(name))] } isFirst={isFirst}/></div>
             }))}

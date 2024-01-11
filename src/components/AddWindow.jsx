@@ -1,9 +1,18 @@
-import { React, useState } from 'react'
+import { React, useState,useEffect } from 'react'
 import styles from '../css/AddWindow.module.css'
 
 function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems }) {
 
     const [input, setInput] = useState({ ...baseItem });
+    // useEffect(() => {
+    //     // כאשר AddWindow נפתחת, חסום את הגלילה של כל העמוד
+    //     document.body.style.overflow = 'hidden';
+        
+    //     // כאשר AddWindow נסגרת, אפשר את הגלילה של כל העמוד
+    //     return () => {
+    //         document.body.style.overflow = 'auto';
+    //     };
+    // }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,28 +42,30 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems 
     }
 
     return (
-        <div className={styles.addWindow}>
-            <p onClick={() => setIsAddWindowShow(false)} className={styles.xbutton} >❌</p>
-            <form onSubmit={handleSubmit}>
-                {propertiesArr.map((prop) => {
-                    return (
-                        <>
-                            <label>{prop}</label>
-                            <input
-                                value={input[prop]}
-                                onChange={(e) => setInput(prev => {
-                                    let tempItem = {...prev};
-                                    tempItem[prop] = e.target.value;
-                                    return tempItem;
-                                })}
-                                type="text"
-                                required
-                            /><br/>
-                        </>
-                    )
-                })}
-                <button type='submit'>Add</button>
-            </form>
+        <div className={styles.back}>
+            <div className={styles.addWindow}>
+                <p onClick={() => setIsAddWindowShow(false)} className={styles.xbutton} >❌</p>
+                <form onSubmit={handleSubmit}>
+                    {propertiesArr.map((prop) => {
+                        return (
+                            <>
+                                <label>{prop}</label>
+                                <input
+                                    value={input[prop]}
+                                    onChange={(e) => setInput(prev => {
+                                        let tempItem = { ...prev };
+                                        tempItem[prop] = e.target.value;
+                                        return tempItem;
+                                    })}
+                                    type="text"
+                                    required
+                                /><br />
+                            </>
+                        )
+                    })}
+                    <button type='submit'>Add</button>
+                </form>
+            </div>
         </div>
     )
 }

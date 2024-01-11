@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import styles from '../../css/Signup.module.css'
 function Signup() {
 
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ function Signup() {
   return (
     <>
       <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+      <form  className={styles.signupContainer} onSubmit={handleSubmit}>
         <label>Username</label>
         <input
           value={input.username}

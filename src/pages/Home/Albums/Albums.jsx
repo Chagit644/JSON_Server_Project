@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import AlbumsFilters from './AlbumsFilters';
 import AddWindow from '../../../components/AddWindow';
-import styles from'../../../css/Albums.module.css'
+import styles from '../../../css/Albums.module.css'
 function Albums() {
   const [albums, setAlbums] = useState([]);
   const [isGotAlbums, setIsGotAlbums] = useState(false)
@@ -19,35 +19,44 @@ function Albums() {
     generalDataAndTools.getItemsFunc(url, setAlbums, setIsGotAlbums);
 
   }
+
   return (
-    <>
-      <AlbumsFilters currentUserId={currentUser.id} getAlbums={getAlbums} setIsGotAlbums={setIsGotAlbums} />
+    <div className={styles.albumsContainer}>
+       <AlbumsFilters currentUserId={currentUser.id} getAlbums={getAlbums} setIsGotAlbums={setIsGotAlbums} />
       <button onClick={() => setIsAddAlbumWindowShow(true)}>➕</button>
-      {!isGotAlbums && <p> Loading... </p>}
-      {isGotAlbums && <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {albums.map((album) => {
-            return (
+      {!isGotAlbums && <p className={styles.loadingMessage}> Loading... </p>}
+      {isGotAlbums && (
+        <table className={styles.albumsTable}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {albums.map((album) => (
               <tr key={album.id}>
                 <td>{album.id}</td>
                 <td><Link to={{pathname:`${album.id}/photos`}} >{album.title}</Link></td>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>}
-      {isAddAlbumWindowShow && <AddWindow setIsAddWindowShow={setIsAddAlbumWindowShow} baseItem={{
-        userId: currentUser.id,
-        title: ''
-      }} propertiesArr={["title"]} url={`albums`} setItems={setAlbums} />}
-    </>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {isAddAlbumWindowShow && (
+        <AddWindow
+          setIsAddWindowShow={setIsAddAlbumWindowShow}
+          baseItem={{
+            userId: currentUser.id,
+            title: ''
+          }}
+          propertiesArr={["title"]}
+          url={`albums`}
+          setItems={setAlbums}
+        />
+      )}
+    </div>
   );
 }
 
-export default Albums
+export default Albums;

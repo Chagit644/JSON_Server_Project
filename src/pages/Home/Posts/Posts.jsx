@@ -3,7 +3,7 @@ import { useActionData, useOutletContext } from "react-router-dom";
 import SinglePostWindow from './SinglePostWindow';
 import PostsFilters from './PostsFilters';
 import AddWindow from '../../../components/AddWindow';
-import styles from '../../../css/posts.module.css'
+import styles from '../../../css/Posts.module.css'
 
 function Posts() {
 

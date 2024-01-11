@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import UpdateWindow from "../../../components/UpdateWindow"
 import AddWindow from "../../../components/AddWindow"
-
+import styles from '../../../css/Posts.module.css'
 function Comments() {
 
     const [comments, setComments] = useState([]);
@@ -25,7 +25,7 @@ function Comments() {
             {!isGotComments && <p>Loading...</p>}
             {isGotComments && <>
                 <button onClick={() => setIsAddCommentWindowShow(true)}>➕</button>
-                <table>
+                <table className={styles.commentsTable}>
                     <thead>
                         <tr>
                             <th>Id</th>

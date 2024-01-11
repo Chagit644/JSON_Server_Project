@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { json, useLocation, useNavigate } from 'react-router-dom'
+import styles from '../../css/Signup.module.css'
 
 function UserDetailsEntry(props) {
 
@@ -54,7 +55,8 @@ function UserDetailsEntry(props) {
   return (
     <>
       <h2>Please complete your details for registration:</h2>
-      <form onSubmit={handleSubmit}>
+      <form  className ={styles.detailsContainer}onSubmit={handleSubmit}>
+       
         <label>Name</label>
         <input
           value={input.name}
@@ -109,6 +111,7 @@ function UserDetailsEntry(props) {
           name="zipCode"
           placeholder="97369"
         />
+      
         <label>Phone</label>
         <input
           value={input.phone}
@@ -143,6 +146,7 @@ function UserDetailsEntry(props) {
           name="bs"
           placeholder="bait sameach"
         />
+       
         <button type='submit'>Submit</button>
       </form>
     </>

@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import { Link, useNavigate} from 'react-router-dom'
+import styles from '../css/Login.module.css'
 function Login() {
 
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Login() {
   return (
     <>
         <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form  className={styles.loginContainer}onSubmit={handleSubmit}>
             <label >Username</label>
             <input value={input.username} onChange={(e) => setInput({...input, username: e.target.value})} type="text" name='username' placeholder='Israel123' required/>
             <label>Password</label>
