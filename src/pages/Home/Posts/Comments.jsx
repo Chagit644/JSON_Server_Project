@@ -15,8 +15,8 @@ function Comments() {
     const generalDataAndTools = useOutletContext();
     const currentUserEmail = generalDataAndTools.currentUser.email;
     
-
     useEffect(() => {
+        alert("jlkj");
         generalDataAndTools.getItemsFunc(`posts/${currentPostId}/comments`, setComments, setIsGotComments)
     }, [])
 
