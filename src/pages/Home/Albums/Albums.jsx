@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
-import AlbumsFilters from './AlbumsFilters';
+import Filters from '../../../components/Filters';
 import AddWindow from '../../../components/AddWindow';
 import styles from '../../../css/Albums.module.css'
+
 function Albums() {
-  const [albums, setAlbums] = useState([]);
+  
+  const [filteredAlbums, setFilteredAlbums] = useState([]);
+  const [allAlbums, setAllAlbums] = useState([]);
   const [isGotAlbums, setIsGotAlbums] = useState(false)
   const [isAddAlbumWindowShow, setIsAddAlbumWindowShow] = useState(false)
   const generalDataAndTools = useOutletContext();
@@ -16,13 +19,13 @@ function Albums() {
   }, []);
 
   function getAlbums(url) {
-    generalDataAndTools.getItemsFunc(url, setAlbums, setIsGotAlbums);
+    generalDataAndTools.getItemsFunc(url, setFilteredAlbums, setIsGotAlbums, setAllAlbums);
 
   }
 
   return (
     <div className={styles.albumsContainer}>
-       <AlbumsFilters currentUserId={currentUser.id} getAlbums={getAlbums} setIsGotAlbums={setIsGotAlbums} />
+      <Filters setFilteredItems={setFilteredAlbums} allItems={allAlbums}/>
       <button onClick={() => setIsAddAlbumWindowShow(true)}>➕</button>
       {!isGotAlbums && <p className={styles.loadingMessage}> Loading... </p>}
       {isGotAlbums && (
@@ -34,7 +37,7 @@ function Albums() {
             </tr>
           </thead>
           <tbody>
-            {albums.map((album) => (
+            {filteredAlbums.map((album) => (
               <tr key={album.id}>
                 <td>{album.id}</td>
                 <td><Link to={{pathname:`${album.id}/photos`}} >{album.title}</Link></td>
@@ -52,7 +55,8 @@ function Albums() {
           }}
           propertiesArr={["title"]}
           url={`albums`}
-          setItems={setAlbums}
+          setFilteredItems={setFilteredAlbums}
+          setAllItems={setAllAlbums}
         />
       )}
     </div>

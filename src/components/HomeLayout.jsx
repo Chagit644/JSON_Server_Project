@@ -5,7 +5,7 @@ import {Outlet} from 'react-router-dom'
 
 function HomeLayout() {
 
-  async function getItemsFunc(url, setListOfItems, setStatusForScreen) {
+  async function getItemsFunc(url, setListOfItems, setStatusForScreen, setListOfAllItems=null) {
     try {
         const response = await fetch(`http://localhost:3000/${url}`);
         if (!response.ok) {
@@ -13,13 +13,16 @@ function HomeLayout() {
         }
         const data = await response.json();
         setListOfItems(data);
+        if(setListOfAllItems) {
+          setListOfAllItems(data);
+        }
         setStatusForScreen(true);
     } catch {
         alert("An error occurred. Please try again ");
     }
 }
 
-  async function deleteItemFunc(url, item, allItems, setAllItems) {
+  async function deleteItemFunc(url, item, filteredItems, setFilteredItems, allItems=null, setAllItems=null) {
       if (confirm("Are You Sure that You Want to Delete this item?")) {
           try {
             //delete item form server
@@ -33,11 +36,18 @@ function HomeLayout() {
             if (!response.ok) {
               throw response.statusText;
             }
-            //delete item from string
-            const currentItemIndex = allItems.findIndex((e) => e == item);
-            const tempItemsArr = [...allItems];
+
+            //delete item from screen
+            let currentItemIndex = filteredItems.findIndex((e) => e == item);
+            let tempItemsArr = [...filteredItems];
             tempItemsArr.splice(currentItemIndex, 1);
-            setAllItems(tempItemsArr);
+            setFilteredItems(tempItemsArr);
+            if(allItems && setAllItems) {
+              currentItemIndex = allItems.findIndex((e) => e == item);
+              tempItemsArr = [...allItems];
+              tempItemsArr.splice(currentItemIndex, 1);
+              setAllItems(tempItemsArr);
+            }
           } catch {
             alert(`An error occurred. Please try again `);
           }

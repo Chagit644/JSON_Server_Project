@@ -40,12 +40,12 @@ function PageOfPhotos({ PHOTOS_IN_PAGE, isAddPhotoWindowShow, setIsAddPhotoWindo
                     title: '',
                     url: '',
                     thumbnailUrl: ''
-                }} propertiesArr={["title", "url", "thumbnailUrl"]} url={`photos`} setItems={setPhotos} />}
+                }} propertiesArr={["title", "url", "thumbnailUrl"]} url={`photos`} setFilteredItems={setPhotos} />}
             {currentUpdated && <UpdateWindow url={`photos/${currentUpdated.id}`}
                 oldItem={currentUpdated}
                 setOldItem={setCurrentUpdated}
-                items={photos}
-                setItems={setPhotos}
+                filteredItems={photos}
+                setFilteredItems={setPhotos}
                 propertiesArr={['title', 'url', 'thumbnailUrl']} />}
             {!isGotPhotos && <p>Loading...</p>}
             {isGotPhotos && <div className={styles.photos}>

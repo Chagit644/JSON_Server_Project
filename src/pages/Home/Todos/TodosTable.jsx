@@ -1,9 +1,17 @@
-import { React, useState } from "react";
-import UpdateWindow from '../../../components/UpdateWindow'
-import styles from '../../../css/Todos.module.css'
-function TodosTable({generalDataAndTools, todos, setTodos }) {
-
+import { React, useEffect, useState } from "react";
+import UpdateWindow from "../../../components/UpdateWindow";
+import styles from "../../../css/Todos.module.css";
+function TodosTable({ currentSortType, sortCurrentTodos, generalDataAndTools, filteredTodos, setFilteredTodos, allTodos, setAllTodos }) {
   const [currentUpdated, setCurrentUpdated] = useState(null);
+  const [isCompletedChange, setIsCompletedChange] = useState(false);
+
+  useEffect(() => {
+    if (currentSortType.current.value == "alphabetical") sortCurrentTodos();
+  }, [currentUpdated]);
+
+  useEffect(() => {
+    if (currentSortType.current.value == "completed") sortCurrentTodos();
+  }, [isCompletedChange]);
 
   function updateTodo(todo, updatedTodo) {
     (async () => {
@@ -18,16 +26,21 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
         throw response.statusText;
       }
       const data = await response.json();
-      const currentTodoIndex = todos.findIndex((t) => t == todo);
-      todos[currentTodoIndex] = data;
-      setTodos((prev) => {
-        prev = [...prev];
-        prev[currentTodoIndex] = data;
-        return prev;
-      });
+
+      let currentTodoIndex = filteredTodos.findIndex((t) => t == todo);
+      let tempTodos = [...filteredTodos];
+      tempTodos[currentTodoIndex] = data;
+      setFilteredTodos(tempTodos);
+
+      currentTodoIndex = allTodos.findIndex((t) => t == todo);
+      tempTodos = [...allTodos];
+      tempTodos[currentTodoIndex] = data;
+      setAllTodos(tempTodos);
+
+      setIsCompletedChange((prev) => !prev);
     })();
   }
- 
+
   return (
     <table className={styles.todosTable}>
       <thead>
@@ -40,22 +53,44 @@ function TodosTable({generalDataAndTools, todos, setTodos }) {
         </tr>
       </thead>
       <tbody>
-        {todos.map((todo) => {
+        {filteredTodos.map((todo) => {
           return (
             <tr key={todo.id}>
               <td>{todo.id}</td>
               <td>{todo.title}</td>
               <td>
-                <input type="checkbox" checked={todo.completed} onChange={() => updateTodo(todo, { ...todo, completed: !todo.completed })} />
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => updateTodo(todo, { ...todo, completed: !todo.completed })}
+                />
               </td>
-              <td className={styles.actionButtons} onClick={() => setCurrentUpdated(todo)}>✏️</td>
-              <td className={styles.actionButtons} onClick={() => generalDataAndTools.deleteItemFunc(`todos/${todo.id}`,todo, todos, setTodos)}>🗑️</td>
+              <td className={styles.actionButtons} onClick={() => setCurrentUpdated(todo)}>
+                ✏️
+              </td>
+              <td
+                className={styles.actionButtons}
+                onClick={() =>
+                  generalDataAndTools.deleteItemFunc(`todos/${todo.id}`, todo, filteredTodos, setFilteredTodos, allTodos, setAllTodos)
+                }
+              >
+                🗑️
+              </td>
             </tr>
           );
         })}
-        {currentUpdated && 
-            <UpdateWindow url={`todos/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} items={todos} setItems={setTodos} propertiesArr={['title']}/>        
-        }
+        {currentUpdated && (
+          <UpdateWindow
+            url={`todos/${currentUpdated.id}`}
+            oldItem={currentUpdated}
+            setOldItem={setCurrentUpdated}
+            filteredItems={filteredTodos}
+            setFilteredItems={setFilteredTodos}
+            allItems={allTodos}
+            setAllItems={setAllTodos}
+            propertiesArr={["title"]}
+          />
+        )}
       </tbody>
     </table>
   );

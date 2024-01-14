@@ -2,7 +2,7 @@ import {React, useState} from 'react'
 import {useNavigate } from "react-router-dom";
 import UpdateWindow from '../../../components/UpdateWindow'
 import styles from '../../../css/Posts.module.css'
-function SinglePostWindow({ generalDataAndTools, post, setCurrentSelectedPost, posts, setPosts }) {
+function SinglePostWindow({ generalDataAndTools, post, setCurrentSelectedPost, filteredPosts, setFilteredPosts, allPosts, setAllPosts }) {
 
     const [currentUpdated, setCurrentUpdated] = useState(null);
     const [currentPost,setCurrentPost]=useState(post)
@@ -10,7 +10,7 @@ function SinglePostWindow({ generalDataAndTools, post, setCurrentSelectedPost, p
 
     function deletePost(post) {
         (async () => {
-            await generalDataAndTools.deleteItemFunc(`posts/${post.id}`, post, posts, setPosts);
+            await generalDataAndTools.deleteItemFunc(`posts/${post.id}`, post, filteredPosts, setFilteredPosts, allPosts, setAllPosts);
             setCurrentSelectedPost(null);
         })();
     }
@@ -26,7 +26,7 @@ function SinglePostWindow({ generalDataAndTools, post, setCurrentSelectedPost, p
                 <button onClick={() => setCurrentUpdated(currentPost)}>✏️</button>
                 <button onClick={() => navigate(`${currentPost.id}/comments`)}>comments</button>
             </div>
-            {currentUpdated && <UpdateWindow url={`posts/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} items={posts} setItems={setPosts} propertiesArr={['title', 'body']} setItemInAdditionalWindow= {setCurrentPost}/>}
+            {currentUpdated && <UpdateWindow url={`posts/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} filteredItems={filteredPosts} setFilteredItems={setFilteredPosts} allItems={allPosts} setAllItems={setAllPosts} propertiesArr={['title', 'body']} setItemInAdditionalWindow= {setCurrentPost}/>}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { React, useState,useEffect } from 'react'
 import styles from '../css/AddWindow.module.css'
 
-function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems }) {
+function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setFilteredItems, setAllItems }) {
 
     const [input, setInput] = useState({ ...baseItem });
     // useEffect(() => {
@@ -29,10 +29,16 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setItems 
                     throw response.statusText;
                 }
                 const data = await response.json();
-                setItems(prev => {
+                setFilteredItems(prev => {
                     prev.push(data);
                     return [...prev]
                 })
+                if(setAllItems) {
+                    setAllItems(prev => {
+                        prev.push(data);
+                        return [...prev]
+                    })
+                }
                 setIsAddWindowShow(false);
             }
             catch (e) {

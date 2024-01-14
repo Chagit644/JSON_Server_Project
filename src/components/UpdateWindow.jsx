@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import styles from '../css/UpdateWindow.module.css'
 
-function UpdateCommentWindow({ url, oldItem, setOldItem, items, setItems, propertiesArr, setItemInAdditionalWindow }) {
+function UpdateCommentWindow({ url, oldItem, setOldItem, filteredItems, setFilteredItems, allItems, setAllItems, propertiesArr, setItemInAdditionalWindow }) {
 
   const [newItem, setNewItem] = useState({ ...oldItem })
 //   useEffect(() => {
@@ -29,12 +29,21 @@ function UpdateCommentWindow({ url, oldItem, setOldItem, items, setItems, proper
           throw response.statusText;
         }
         const data = await response.json();
-        const currentIndex = items.findIndex((e) => e == oldItem);
-        setItems((prev) => {
+        let currentIndex = filteredItems.findIndex((e) => e == oldItem);
+        setFilteredItems((prev) => {
           prev = [...prev];
           prev[currentIndex] = data;
           return prev;
         });
+        if(allItems && setAllItems) {
+          currentIndex = allItems.findIndex((e) => e == oldItem);
+          setAllItems((prev) => {
+            prev = [...prev];
+            prev[currentIndex] = data;
+            return prev;
+          });
+
+        }
         setNewItem(data);
         setOldItem(null);
         if (setItemInAdditionalWindow != null)

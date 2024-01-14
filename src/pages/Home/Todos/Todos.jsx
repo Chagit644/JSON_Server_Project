@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
-import TodosFilters from "./TodosFilters";
+import Filters  from "../../../components/Filters";
 import TodosTable from "./TodosTable";
 import AddWindow from "../../../components/AddWindow";
 
 function Todos() {
 
+  const [filteredTodos, setFilteredTodos] = useState([]);
+  const [allTodos, setAllTodos] = useState([])
   const [isGotTodos, setIsGotTodos] = useState(false);
   const [isShowAddTodoWindow, setIsShowAddTodoWindow] = useState(false);
-  const [todos, setTodos] = useState([]);
-  const [filteredTodos, setFiltersTodos] = useState([])
+  const currentSortType = useRef();
   const generalDataAndTools = useOutletContext();
   const currentUser = generalDataAndTools.currentUser;
 
@@ -17,13 +18,14 @@ function Todos() {
     getTodos(`users/${currentUser.id}/todos`);
   }, []);
 
+
   async function getTodos(url) {
-    generalDataAndTools.getItemsFunc(url, setTodos, setIsGotTodos)
+    generalDataAndTools.getItemsFunc(url, setFilteredTodos, setIsGotTodos, setAllTodos)
   }
 
-  function handleOrderChange(e) {
+  function sortCurrentTodos() {
     let compareFunc = null;
-    switch (e.target.value) {
+    switch (currentSortType.current.value) {
       case "serial":
         compareFunc = (a, b) => a.id - b.id;
         break;
@@ -39,16 +41,16 @@ function Todos() {
       default:
         break;
     }
-    setTodos([...todos.sort(compareFunc)]);
+    setFilteredTodos([...filteredTodos.sort(compareFunc)]);
   }
 
 
   return (
     <>
-      <TodosFilters setIsGotTodos={setIsGotTodos} currentUserId={currentUser.id} getTodos={getTodos} />
+      <Filters allItems={allTodos} setFilteredItems={setFilteredTodos} isWithCompleted={true}/>
       <div>
         <label>Order by:</label>
-        <select onChange={handleOrderChange}>
+        <select ref={currentSortType} onChange={sortCurrentTodos}>
           <option value="serial">Serial</option>
           <option value="completed">Completed First</option>
           <option value="alphabetical">Alphabetical</option>
@@ -57,13 +59,13 @@ function Todos() {
       </div>
       <button onClick={() => setIsShowAddTodoWindow(true)}>➕</button>
       {!isGotTodos && <h3>Loading...</h3>}
-      {isGotTodos && <TodosTable  generalDataAndTools={generalDataAndTools} todos={todos} setTodos={setTodos}/>}
+      {isGotTodos && <TodosTable currentSortType={currentSortType} generalDataAndTools={generalDataAndTools} filteredTodos={filteredTodos} setFilteredTodos={setFilteredTodos} allTodos={allTodos} setAllTodos={setAllTodos} sortCurrentTodos={sortCurrentTodos}/>}
       {isShowAddTodoWindow && 
          <AddWindow setIsAddWindowShow={setIsShowAddTodoWindow} baseItem={{
           userId: currentUser.id,
           title: '',
           completed: false
-          }} propertiesArr={["title"]} url= {`todos`} setItems={setTodos}/>
+          }} propertiesArr={["title"]} url= {`todos`} setFilteredItems={setFilteredTodos} setAllItems={setAllTodos}/>
       }
     </>
   );

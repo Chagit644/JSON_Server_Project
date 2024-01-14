@@ -16,7 +16,6 @@ function Comments() {
     const currentUserEmail = generalDataAndTools.currentUser.email;
     
     useEffect(() => {
-        alert("dfdsds");
         generalDataAndTools.getItemsFunc(`posts/${currentPostId}/comments`, setComments, setIsGotComments)
     }, [])
 
@@ -49,7 +48,7 @@ function Comments() {
                                 </tr>
                             );
                         })}
-                        {currentUpdated && <UpdateWindow url={`comments/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} items={comments} setItems={setComments} propertiesArr={['name', 'body']} />}
+                        {currentUpdated && <UpdateWindow url={`comments/${currentUpdated.id}`} oldItem={currentUpdated} setOldItem={setCurrentUpdated} filteredItems={comments} setFilteredItems={setComments} propertiesArr={['name', 'body']} />}
                     </tbody>
                 </table>
             </>
@@ -59,7 +58,7 @@ function Comments() {
                 postId: currentPostId,
                 name: '',
                 email:currentUserEmail,
-                body: ''}} propertiesArr={["name", "body"]} url= {`posts/${currentPostId}/comments`} setItems={setComments}/>
+                body: ''}} propertiesArr={["name", "body"]} url= {`posts/${currentPostId}/comments`} setFilteredItems={setComments}/>
             }
         </>
     )
