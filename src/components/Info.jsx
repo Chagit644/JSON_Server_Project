@@ -6,22 +6,22 @@ function Info({ currentUser, setIsShowInfo }) {
   return (
     <div className={styles.back}>
       <div className={styles.infoWrapper}>
-        <button onClick={() => setIsShowInfo(prev => !prev)}>❌</button>
+        <button className={styles.xButton} onClick={() => setIsShowInfo(prev => !prev)}>❌</button>
         <ul>
-          <li>Username: {currentUser.username}</li>
-          <li>Name: {currentUser.name}</li>
-          <li>Email: {currentUser.email}</li>
+          <li><h3><u> {currentUser.username}</u></h3></li>
+          <li><b>Name: </b>{currentUser.name}</li>
+          <li><b>Email: </b>{currentUser.email}</li>
           <h4>Address:</h4>
-          <li>Street: {currentUser.address.street}</li>
-          <li>Suite: {currentUser.address.suite}</li>
-          <li>City: {currentUser.address.city}</li>
-          <li>Zip Code: {currentUser.address.zipCode}</li>
-          <li>Phone: {currentUser.phone}</li>
-          <li>Website: {currentUser.website}</li>
+          <li><b>Street: </b>{currentUser.address.street}</li>
+          <li><b>Suite: </b>{currentUser.address.suite}</li>
+          <li><b>City: </b>{currentUser.address.city}</li>
+          <li><b>Zip Code: </b>{currentUser.address.zipCode}</li>
+          <li><b>Phone: </b>{currentUser.phone}</li>
+          <li><b>Website: </b>{currentUser.website}</li>
           <h4>Company:</h4>
-          <li>Name: {currentUser.company.name}</li>
-          <li>Catch Phrase: {currentUser.company.name}</li>
-          <li>Bs: {currentUser.company.bs}</li>
+          <li><b>Name: </b>{currentUser.company.name}</li>
+          <li><b>Catch Phrase: </b>{currentUser.company.name}</li>
+          <li><b>Bs: </b>{currentUser.company.bs}</li>
         </ul>
       </div>
     </div>

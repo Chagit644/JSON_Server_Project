@@ -26,7 +26,8 @@ function Albums() {
   return (
     <div className={styles.albumsContainer}>
       <Filters setFilteredItems={setFilteredAlbums} allItems={allAlbums}/>
-      <button onClick={() => setIsAddAlbumWindowShow(true)}>➕</button>
+      <div className={styles.albumsMain}>
+      <button className={styles.addButton} onClick={() => setIsAddAlbumWindowShow(true)}>Add Album ➕</button>
       {!isGotAlbums && <p className={styles.loadingMessage}> Loading... </p>}
       {isGotAlbums && (
         <table className={styles.albumsTable}>
@@ -59,6 +60,7 @@ function Albums() {
           setAllItems={setAllAlbums}
         />
       )}
+      </div>
     </div>
   );
 }

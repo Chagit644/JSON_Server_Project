@@ -54,8 +54,9 @@ function PageOfPhotos({ PHOTOS_IN_PAGE, isAddPhotoWindowShow, setIsAddPhotoWindo
                         <p>{photo.id}</p>
                         <p className={styles.photoTitle}>{photo.title}</p>
                         <img src={photo.thumbnailUrl} /><br />
+                        <div className={styles.buttonsOfPhoto}>
                         <button onClick={() => deletePhoto(photo)}>🗑️</button>
-                        <button onClick={() => updatePhoto(photo)}>✏️</button>
+                        <button onClick={() => updatePhoto(photo)}>✏️</button></div>
                     </div>
                 })
                 }</div>}

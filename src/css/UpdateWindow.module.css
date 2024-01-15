@@ -21,6 +21,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.15); /* רקע אפור שקוף כחצי שקוף */
+    background-color: rgba(0, 0, 0, 0.4); /* רקע אפור שקוף כחצי שקוף */
     z-index: 1; /* יוצא מעל לעמוד הרגיל */
 }

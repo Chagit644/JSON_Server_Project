@@ -1,4 +1,5 @@
 import {React, useState} from 'react'
+import styles from '../css/Filters.module.css'
 
 function Filters({allItems, setFilteredItems, isWithCompleted = false}) {
 
@@ -18,23 +19,23 @@ function Filters({allItems, setFilteredItems, isWithCompleted = false}) {
       }
   
     return (
-      <div>
+      <div className={styles.filtersContainer}>
           <h4>Filters:</h4>
             <form onSubmit={handleFiltersSubmit}>
               <label>Id:</label>
-              <input type='number' value={filters.id} onChange={(e) => setFilters({ ...filters, id: e.target.value })} />
+              <input className={styles.textInput} type='number' value={filters.id} onChange={(e) => setFilters({ ...filters, id: e.target.value })} /><br/>
               <label>Title:</label>
-              <input type='text' value={filters.title} onChange={(e) => setFilters({ ...filters, title: e.target.value })} />
+              <input className={styles.textInput} type='text' value={filters.title} onChange={(e) => setFilters({ ...filters, title: e.target.value })} />
               {isWithCompleted && <div>
                 <input type='radio' value="completed" id="completed" name="filters" checked={filters.completed == "completed"} onChange={handleCompletedOfFiltersChange} />
-                <label htmlFor="completed">Completed</label>
+                <label htmlFor="completed">Completed</label><br/>
                 <input type='radio' value="notCompleted" id="notCompleted" name="filters" checked={filters.completed == "notCompleted"} onChange={handleCompletedOfFiltersChange} />
-                <label htmlFor="notCompleted">Not Completed</label>
+                <label htmlFor="notCompleted">Not Completed</label><br/>
                 <input type='radio' value="all" id="all" name="filters" checked = {filters.completed == "all"}onChange={handleCompletedOfFiltersChange} />
                 <label htmlFor="all">All</label>
               </div>}
-              <button type='reset' onClick={(e) => {e.preventDefault(); setFilters({ id: '', title: '', completed: "all" })}}>Clear All</button>
-              <button type = 'submit' >Search</button>
+              <button type='reset' onClick={(e) => {e.preventDefault(); setFilters({ id: '', title: '', completed: "all" })}}>Clear All</button> 
+              <button type = 'submit'>🔍</button>
             </form>
       </div>
       )

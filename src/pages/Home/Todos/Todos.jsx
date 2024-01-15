@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
-import Filters  from "../../../components/Filters";
+import Filters from "../../../components/Filters";
 import TodosTable from "./TodosTable";
 import AddWindow from "../../../components/AddWindow";
-
+import styles from "../../../css/Todos.module.css"
 function Todos() {
 
   const [filteredTodos, setFilteredTodos] = useState([]);
@@ -43,31 +43,29 @@ function Todos() {
     }
     setFilteredTodos([...filteredTodos.sort(compareFunc)]);
   }
-
-
   return (
-    <>
-      <Filters allItems={allTodos} setFilteredItems={setFilteredTodos} isWithCompleted={true}/>
-      <div>
-        <label>Order by:</label>
-        <select ref={currentSortType} onChange={sortCurrentTodos}>
+    <div className={styles.todosContainer}>
+      <Filters allItems={allTodos} setFilteredItems={setFilteredTodos} isWithCompleted={true} />
+      <div className={styles.todosMain}>
+        <label>Order by: </label>
+        <select className={styles.orderByTodos} ref={currentSortType} onChange={sortCurrentTodos}>
           <option value="serial">Serial</option>
           <option value="completed">Completed First</option>
           <option value="alphabetical">Alphabetical</option>
           <option value="random">Random</option>
         </select>
-      </div>
-      <button onClick={() => setIsShowAddTodoWindow(true)}>➕</button>
-      {!isGotTodos && <h3>Loading...</h3>}
-      {isGotTodos && <TodosTable currentSortType={currentSortType} generalDataAndTools={generalDataAndTools} filteredTodos={filteredTodos} setFilteredTodos={setFilteredTodos} allTodos={allTodos} setAllTodos={setAllTodos} sortCurrentTodos={sortCurrentTodos}/>}
-      {isShowAddTodoWindow && 
-         <AddWindow setIsAddWindowShow={setIsShowAddTodoWindow} baseItem={{
-          userId: currentUser.id,
-          title: '',
-          completed: false
-          }} propertiesArr={["title"]} url= {`todos`} setFilteredItems={setFilteredTodos} setAllItems={setAllTodos}/>
-      }
-    </>
+        <button onClick={() => setIsShowAddTodoWindow(true)}>Add Todo ➕</button>
+        {!isGotTodos && <h3>Loading...</h3>}
+        {isGotTodos && <TodosTable currentSortType={currentSortType} generalDataAndTools={generalDataAndTools} filteredTodos={filteredTodos} setFilteredTodos={setFilteredTodos} allTodos={allTodos} setAllTodos={setAllTodos} sortCurrentTodos={sortCurrentTodos} />}
+        {isShowAddTodoWindow &&
+          <AddWindow setIsAddWindowShow={setIsShowAddTodoWindow} baseItem={{
+            userId: currentUser.id,
+            title: '',
+            completed: false
+          }} propertiesArr={["title"]} url={`todos`} setFilteredItems={setFilteredTodos} setAllItems={setAllTodos} />
+        }
+        </div>
+    </div>
   );
 }
 export default Todos;

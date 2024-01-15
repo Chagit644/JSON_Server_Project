@@ -9,7 +9,6 @@ function Comments() {
     const [isGotComments, setIsGotComments] = useState(false);
     const [isAddCommentWindowShow, setIsAddCommentWindowShow] = useState(false);
     const [currentUpdated, setCurrentUpdated] = useState(null)
-    
     const {postId} = useParams();
     const currentPostId = postId;
     const generalDataAndTools = useOutletContext();
@@ -23,7 +22,8 @@ function Comments() {
         <>
             {!isGotComments && <p>Loading...</p>}
             {isGotComments && <>
-                <button onClick={() => setIsAddCommentWindowShow(true)}>➕</button>
+            <h2>Post: {currentPostId}</h2>
+                <button onClick={() => setIsAddCommentWindowShow(true)}>Add Comment ➕</button>
                 <table className={styles.commentsTable}>
                     <thead>
                         <tr>
@@ -42,8 +42,8 @@ function Comments() {
                                     <td>{comment.email}</td>
                                     <td>{comment.body}</td>
                                     {currentUserEmail == comment.email && <>
-                                        <td onClick={() => setCurrentUpdated(comment)}>✏️</td>
-                                        <td onClick={() => generalDataAndTools.deleteItemFunc(`comments/${comment.id}`, comment, comments, setComments)}>🗑️</td>
+                                        <td className={styles.actionButtons} onClick={() => setCurrentUpdated(comment)}>✏️</td>
+                                        <td className={styles.actionButtons} onClick={() => generalDataAndTools.deleteItemFunc(`comments/${comment.id}`, comment, comments, setComments)}>🗑️</td>
                                     </>}
                                 </tr>
                             );

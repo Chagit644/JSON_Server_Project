@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import SinglePostWindow from './SinglePostWindow';
 import Filters from '../../../components/Filters'
 import AddWindow from '../../../components/AddWindow';
@@ -25,30 +25,29 @@ function Posts() {
   }
 
   return (
-    <>
-      <Filters setFilteredItems={setFilteredPosts} allItems={allPosts}/>
-      <button onClick={() => setIsAddPostWindowShow(true)}>➕</button>
-
-      <div >
+    <div className={styles.postsContainer}>
+      <div className={styles.filterDiv}>
+      <Filters setFilteredItems={setFilteredPosts} allItems={allPosts} /></div>
+      <div className={styles.postsMain}>
+        <button onClick={() => setIsAddPostWindowShow(true)}>Add Post ➕</button>
         {!isGotPosts && <p>Loading...</p>}
         {isGotPosts && <div className={styles.allPosts}>
           {filteredPosts.map((post) =>
-            <div key={post.id} className={styles.singlePost}>
+            <div key={post.id} className={styles.singlePost} onClick={() => setCurrentSelectedPost(post)}>
               <p> Id: {post.id}</p>
               <p className={styles.postTitle}>{post.title}</p>
-              <button onClick={() => setCurrentSelectedPost(post)} className={styles.openButton}>Open</button>
             </div>)}
         </div>}
-      </div>
-      {currentSelectedPost && <SinglePostWindow generalDataAndTools={{ ...generalDataAndTools }} post={currentSelectedPost} setCurrentSelectedPost={setCurrentSelectedPost}  filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} allPosts={allPosts} setAllPosts={setAllPosts} currentUserEmail={currentUser.email} />}
-      {isAddPostWindowShow &&
-        <AddWindow setIsAddWindowShow={setIsAddPostWindowShow} baseItem={{
-          userId: currentUser.id,
-          title: '',
-          body: ''
-        }} propertiesArr={["title", "body"]} url={`posts`} setFilteredItems={setFilteredPosts} setAllItems={setAllPosts} />
-      }
-    </>
+        {currentSelectedPost && <SinglePostWindow generalDataAndTools={{ ...generalDataAndTools }} post={currentSelectedPost} setCurrentSelectedPost={setCurrentSelectedPost} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} allPosts={allPosts} setAllPosts={setAllPosts} currentUserEmail={currentUser.email} />}
+        {isAddPostWindowShow &&
+          <AddWindow setIsAddWindowShow={setIsAddPostWindowShow} baseItem={{
+            userId: currentUser.id,
+            title: '',
+            body: ''
+          }} propertiesArr={["title", "body"]} url={`posts`} setFilteredItems={setFilteredPosts} setAllItems={setAllPosts} />
+        }
+        </div>
+    </div>
   )
 }
 

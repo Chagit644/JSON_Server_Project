@@ -1,8 +1,8 @@
 import React from 'react'
-
+import styles from '../css/Footer.module.css'
 function Footer() {
   return (
-    <div>©️ Chagit & Yehudit Proffesional Web Development 2024</div>
+    <footer>©️ Chagit & Yehudit Proffesional Web Development 2024</footer>
   )
 }
 
