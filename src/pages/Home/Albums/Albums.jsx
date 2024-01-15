@@ -6,7 +6,7 @@ import AddWindow from '../../../components/AddWindow';
 import styles from '../../../css/Albums.module.css'
 
 function Albums() {
-  
+
   const [filteredAlbums, setFilteredAlbums] = useState([]);
   const [allAlbums, setAllAlbums] = useState([]);
   const [isGotAlbums, setIsGotAlbums] = useState(false)
@@ -25,41 +25,34 @@ function Albums() {
 
   return (
     <div className={styles.albumsContainer}>
-      <Filters setFilteredItems={setFilteredAlbums} allItems={allAlbums}/>
+      <Filters setFilteredItems={setFilteredAlbums} allItems={allAlbums} />
       <div className={styles.albumsMain}>
-      <button className={styles.addButton} onClick={() => setIsAddAlbumWindowShow(true)}>Add Album ➕</button>
-      {!isGotAlbums && <p className={styles.loadingMessage}> Loading... </p>}
-      {isGotAlbums && (
-        <table className={styles.albumsTable}>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Title</th>
-            </tr>
-          </thead>
-          <tbody>
+        <button className={styles.addButton} onClick={() => setIsAddAlbumWindowShow(true)}>Add Album ➕</button>
+        {!isGotAlbums && <p className={styles.loadingMessage}> Loading... </p>}
+        {isGotAlbums && (
+          <div className={styles.allAlbums}>
             {filteredAlbums.map((album) => (
-              <tr key={album.id}>
-                <td>{album.id}</td>
-                <td><Link to={{pathname:`${album.id}/photos`}} >{album.title}</Link></td>
-              </tr>
+              <Link to={{ pathname: `${album.id}/photos` }} >
+              <div className={styles.album}>
+                <b>Album Id: </b>{album.id}<br/>{album.title}
+              </div></Link>
             ))}
-          </tbody>
-        </table>
-      )}
-      {isAddAlbumWindowShow && (
-        <AddWindow
-          setIsAddWindowShow={setIsAddAlbumWindowShow}
-          baseItem={{
-            userId: currentUser.id,
-            title: ''
-          }}
-          propertiesArr={["title"]}
-          url={`albums`}
-          setFilteredItems={setFilteredAlbums}
-          setAllItems={setAllAlbums}
-        />
-      )}
+          </div>
+
+        )}
+        {isAddAlbumWindowShow && (
+          <AddWindow
+            setIsAddWindowShow={setIsAddAlbumWindowShow}
+            baseItem={{
+              userId: currentUser.id,
+              title: ''
+            }}
+            propertiesArr={["title"]}
+            url={`albums`}
+            setFilteredItems={setFilteredAlbums}
+            setAllItems={setAllAlbums}
+          />
+        )}
       </div>
     </div>
   );

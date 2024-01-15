@@ -48,7 +48,7 @@ function Photos() {
   
   return (
     <>
-      <button className={styles.addButton} onClick={() => setIsAddPhotoWindowShow(true)}>
+      <button onClick={() => setIsAddPhotoWindowShow(true)}>
         Add Photo ➕
       </button>
       {currentPages.map((name) => {
