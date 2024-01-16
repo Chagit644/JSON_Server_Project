@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { json, useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../css/Signup.module.css'
 
-function UserDetailsEntry(props) {
+function UserDetailsEntry() {
 
   const navigate = useNavigate();
   const location = useLocation();

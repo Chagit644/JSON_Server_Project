@@ -64,7 +64,7 @@ function Todos() {
             completed: false
           }} propertiesArr={["title"]} url={`todos`} setFilteredItems={setFilteredTodos} setAllItems={setAllTodos} />
         }
-        </div>
+      </div>
     </div>
   );
 }

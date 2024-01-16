@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UpdateWindow from '../../../components/UpdateWindow'
 import AddWindow from '../../../components/AddWindow';
-import styles from'../../../css/Albums.module.css'
+import styles from'../../../css/Albums.module.css';
 
 function PageOfPhotos({ PHOTOS_IN_PAGE, isAddPhotoWindowShow, setIsAddPhotoWindowShow, generalDataAndTools, albumId, currentPage, photosToShow}) {
 
@@ -19,7 +19,7 @@ function PageOfPhotos({ PHOTOS_IN_PAGE, isAddPhotoWindowShow, setIsAddPhotoWindo
     }, []);
 
     useEffect(() => {
-        localStorage.setItem(`album${albumId}page${currentPage}`, JSON.stringify(photos))
+        localStorage.setItem(`album${albumId}page${currentPage}`, JSON.stringify(photos));
     }, [photos])
 
     function deletePhoto(photo) {
@@ -28,7 +28,7 @@ function PageOfPhotos({ PHOTOS_IN_PAGE, isAddPhotoWindowShow, setIsAddPhotoWindo
     }
     function updatePhoto(photo) {
         (async () => {
-            await setCurrentUpdated(photo)
+            await setCurrentUpdated(photo);
             localStorage.setItem(`album${albumId}page${currentPage}`, JSON.stringify(photos))
         })();
     }

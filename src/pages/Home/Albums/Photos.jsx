@@ -27,25 +27,7 @@ function Photos() {
   }, [sumOfPhotosInAlbum, currentPages]);
 
 
-//  useEffect(() => {
-//   const handleScroll = () => {
-//     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-//       setCurrentPages((prev) => {
-//         const tempCurrentPages = [...prev];
-//         tempCurrentPages.push(currentPages.at(-1) + 1);
-//         return tempCurrentPages;
-//       })
-//     }
-//   };
 
-//   window.addEventListener("scroll", handleScroll);
-
-//   return () => {
-//     window.removeEventListener("scroll", handleScroll);
-//   };
-// }, []);
-  
-  
   return (
     <>
       <button onClick={() => setIsAddPhotoWindowShow(true)}>
@@ -55,7 +37,7 @@ function Photos() {
         return (
           <div key={name}>
             <PageOfPhotos
-              PHOTOS_IN_PAGE = {PHOTOS_IN_PAGE}
+              PHOTOS_IN_PAGE={PHOTOS_IN_PAGE}
               isAddPhotoWindowShow={isAddPhotoWindowShow}
               setIsAddPhotoWindowShow={setIsAddPhotoWindowShow}
               generalDataAndTools={generalDataAndTools}

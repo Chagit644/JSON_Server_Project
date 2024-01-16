@@ -8,7 +8,7 @@ function Signup() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     if (input.password != input.verifyPassword) {
       alert("The passwords are different. Please try again.");
       setInput({ ...input, password: "", verifyPassword: "" });
@@ -20,20 +20,20 @@ function Signup() {
     async function getUserData() {
       try {
         const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
-        if(!response.ok) {
+        if (!response.ok) {
           throw response.statusText;
         }
         const data = await response.json();
 
         if (data.length == 0) {
-          navigate('/signup/details',{
-            state:{
-            username:input.username,
-            password:input.password,
-          }
+          navigate('/signup/details', {
+            state: {
+              username: input.username,
+              password: input.password,
+            }
           });
-        } 
-        
+        }
+
         else {
           alert("This usrename is already exist. Try another.");
           setInput({ username: "", password: "", verifyPassword: "" });
@@ -43,13 +43,13 @@ function Signup() {
         alert("An error occurred. Please try again ")
       }
     };
-    
+
 
   }
   return (
     <>
       <h1>Signup</h1>
-      <form  className={styles.signupContainer} onSubmit={handleSubmit}>
+      <form className={styles.signupContainer} onSubmit={handleSubmit}>
         <label>Username</label>
         <input
           value={input.username}
@@ -58,7 +58,7 @@ function Signup() {
           name="username"
           placeholder="Israel123"
           required
-        ></input><br/>
+        ></input><br />
         <label>Password</label>
         <input
           value={input.password}
@@ -66,7 +66,7 @@ function Signup() {
           type="Password"
           placeholder="*********"
           required
-        ></input><br/>
+        ></input><br />
         <label>Verify Password</label>
         <input
           value={input.verifyPassword}
@@ -74,7 +74,7 @@ function Signup() {
           type="Password"
           placeholder="*********"
           required
-        ></input><br/>
+        ></input><br />
         <button type="submit">Submit</button>
         <br />
         <span>Already have an account?</span>

@@ -2,6 +2,7 @@ import { React, useEffect, useState } from "react";
 import UpdateWindow from "../../../components/UpdateWindow";
 import styles from "../../../css/Todos.module.css";
 function TodosTable({ currentSortType, sortCurrentTodos, generalDataAndTools, filteredTodos, setFilteredTodos, allTodos, setAllTodos }) {
+
   const [currentUpdated, setCurrentUpdated] = useState(null);
   const [isCompletedChange, setIsCompletedChange] = useState(false);
 

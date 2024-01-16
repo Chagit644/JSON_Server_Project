@@ -1,18 +1,9 @@
-import { React, useState,useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import styles from '../css/AddWindow.module.css'
 
 function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setFilteredItems, setAllItems }) {
 
     const [input, setInput] = useState({ ...baseItem });
-    // useEffect(() => {
-    //     // כאשר AddWindow נפתחת, חסום את הגלילה של כל העמוד
-    //     document.body.style.overflow = 'hidden';
-        
-    //     // כאשר AddWindow נסגרת, אפשר את הגלילה של כל העמוד
-    //     return () => {
-    //         document.body.style.overflow = 'auto';
-    //     };
-    // }, []);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -33,7 +24,7 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setFilter
                     prev.push(data);
                     return [...prev]
                 })
-                if(setAllItems) {
+                if (setAllItems) {
                     setAllItems(prev => {
                         prev.push(data);
                         return [...prev]

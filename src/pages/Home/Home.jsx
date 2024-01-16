@@ -1,5 +1,5 @@
 import React from 'react'
-import { useOutletContext,Link } from 'react-router-dom'
+import { useOutletContext, Link } from 'react-router-dom'
 import styles from '../../css/Home.module.css'
 function Home() {
 

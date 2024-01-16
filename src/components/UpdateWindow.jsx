@@ -1,18 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../css/UpdateWindow.module.css'
 
 function UpdateCommentWindow({ url, oldItem, setOldItem, filteredItems, setFilteredItems, allItems, setAllItems, propertiesArr, setItemInAdditionalWindow }) {
 
   const [newItem, setNewItem] = useState({ ...oldItem })
-//   useEffect(() => {
-//     // כאשר AddWindow נפתחת, חסום את הגלילה של כל העמוד
-//     document.body.style.overflow = 'hidden';
-    
-//     // כאשר AddWindow נסגרת, אפשר את הגלילה של כל העמוד
-//     return () => {
-//         document.body.style.overflow = 'auto';
-//     };
-// }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,15 +26,15 @@ function UpdateCommentWindow({ url, oldItem, setOldItem, filteredItems, setFilte
           prev[currentIndex] = data;
           return prev;
         });
-        if(allItems && setAllItems) {
+        if (allItems && setAllItems) {
           currentIndex = allItems.findIndex((e) => e == oldItem);
           setAllItems((prev) => {
             prev = [...prev];
             prev[currentIndex] = data;
             return prev;
           });
-
         }
+        
         setNewItem(data);
         setOldItem(null);
         if (setItemInAdditionalWindow != null)

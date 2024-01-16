@@ -32,7 +32,7 @@ function Albums() {
         {isGotAlbums && (
           <div className={styles.allAlbums}>
             {filteredAlbums.map((album) => (
-              <Link to={{ pathname: `${album.id}/photos` }} >
+              <Link key={album.id} to={{ pathname: `${album.id}/photos` }} >
               <div className={styles.album}>
                 <b>Album Id: </b>{album.id}<br/>{album.title}
               </div></Link>

@@ -17,7 +17,6 @@ function Info({ currentUser, setIsShowInfo }) {
           <li><b>City: </b>{currentUser.address.city}</li>
           <li><b>Zip Code: </b>{currentUser.address.zipCode}</li>
           <li><b>Phone: </b>{currentUser.phone}</li>
-          <li><b>Website: </b>{currentUser.website}</li>
           <h4>Company:</h4>
           <li><b>Name: </b>{currentUser.company.name}</li>
           <li><b>Catch Phrase: </b>{currentUser.company.name}</li>
