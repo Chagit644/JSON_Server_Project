@@ -9,7 +9,7 @@ function AddWindow({ setIsAddWindowShow, baseItem, propertiesArr, url, setFilter
         e.preventDefault();
         (async () => {
             try {
-                const response = await fetch(`http://localhost:3000/${url}`, {
+                const response = await fetch(`http://localhost:1234/${url}`, {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json'

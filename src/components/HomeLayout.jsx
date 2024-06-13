@@ -7,7 +7,7 @@ function HomeLayout() {
 
   async function getItemsFunc(url, setListOfItems, setStatusForScreen, setListOfAllItems = null) {
     try {
-      const response = await fetch(`http://localhost:3000/${url}`);
+      const response = await fetch(`http://localhost:1234/${url}`);
       if (!response.ok) {
         throw response.statusText;
       }
@@ -26,7 +26,7 @@ function HomeLayout() {
     if (confirm("Are You Sure that You Want to Delete this item?")) {
       try {
         //delete item form server
-        const response = await fetch(`http://localhost:3000/${url}`, {
+        const response = await fetch(`http://localhost:1234/${url}`, {
           method: "DELETE",
           headers: {
             "Content-type": "application/json",

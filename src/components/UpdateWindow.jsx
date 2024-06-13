@@ -9,7 +9,7 @@ function UpdateCommentWindow({ url, oldItem, setOldItem, filteredItems, setFilte
     e.preventDefault();
     try {
       (async () => {
-        const response = await fetch(`http://localhost:3000/${url}`, {
+        const response = await fetch(`http://localhost:1234/${url}`, {
           method: "PUT",
           headers: {
             "Content-type": "application/json",

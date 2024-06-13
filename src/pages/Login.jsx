@@ -12,7 +12,7 @@ function Login() {
 
     async function getUserData() {
       try {
-        const response = await fetch(`http://localhost:3000/users/?username=${input.username}&website=${input.password}`);
+        const response = await fetch(`http://localhost:1234/users/?username=${input.username}&website=${input.password}`);
         if (!response.ok) {
           throw response.statusText;
         }

@@ -19,7 +19,8 @@ function Signup() {
 
     async function getUserData() {
       try {
-        const response = await fetch(`http://localhost:3000/users/?username=${input.username}`);
+        debugger;
+        const response = await fetch(`http://localhost:1234/users/?username=${input.username}`);
         if (!response.ok) {
           throw response.statusText;
         }

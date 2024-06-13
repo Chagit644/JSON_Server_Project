@@ -32,7 +32,7 @@ function UserDetailsEntry() {
 
     async function createNewUser() {
       try {
-        const response = await fetch(`http://localhost:3000/users`, {
+        const response = await fetch(`http://localhost:1234/users`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json'

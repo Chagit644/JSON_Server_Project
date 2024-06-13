@@ -17,7 +17,7 @@ function Photos() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`http://localhost:3000/albums/${albumId}/photos/?_start=0&_limit=0`);
+      const response = await fetch(`http://localhost:1234/albums/${albumId}/photos/?_start=0&_limit=0`);
       setSumOfPhotosInAlbum(parseInt(response.headers.get("X-Total-Count")));
     })();
   }, []);
